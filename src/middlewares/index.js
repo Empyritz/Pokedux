@@ -15,7 +15,7 @@ export const featuring = (store) => (next) => (action) => {
 }
 
 export const capitalize = (store) => (next) => (action) => {
-  if(action.type === SET_POKEMONS){
+  if(action.type === 'data/setPokemons'){
     const prefixed = action.payload.map(pokemon => ({
       ...pokemon,
       name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
@@ -23,6 +23,32 @@ export const capitalize = (store) => (next) => (action) => {
     const updateAction = {...action, payload: prefixed}
     next(updateAction)
   }else {
+    next(action)
+  }
+}
+
+// export const capitalize = (store) => (next) => (action) => {
+//   if(action.type === SET_POKEMONS){
+//     const prefixed = action.payload.map(pokemon => ({
+//       ...pokemon,
+//       name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+//     }))
+//     const updateAction = {...action, payload: prefixed}
+//     next(updateAction)
+//   }else {
+//     next(action)
+//   }
+// }
+
+export const addFavorite = (store) => (next) => (action) => {
+  if(action.type === 'data/setPokemons'){
+    const favorite = action.payload.map(pokemon => ({
+      ...pokemon,
+      favorite: false
+    }))
+    const updateAction = {...action, payload: favorite}
+    next(updateAction)
+  }else{
     next(action)
   }
 }
