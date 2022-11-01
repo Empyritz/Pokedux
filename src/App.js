@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
-import { getPokemons, getPokemonDetails } from './api/index'
-// import { getPokemonsWithDetails } from './actions/index'
+import { getPokemons } from './api/index'
+import { getPokemonsWithDetails } from './actions/index'
 import './App.css';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
 import logo from './statics/logo.svg'
-import { setPokemons } from './actions';
+// import { setPokemons } from './actions';
 
 function App() {
   const pokemons = useSelector(state => state.pokemons)
@@ -16,10 +16,10 @@ function App() {
   useEffect(() => {
     const fetchPokemons = async () => {
       const pokemonsRes = await getPokemons()
-      const pokemonDetails = await Promise.all(pokemonsRes.map(pokemon => getPokemonDetails(pokemon)))
-      dispatch(setPokemons(pokemonDetails))
+      // const pokemonDetails = await Promise.all(pokemonsRes.map(pokemon => getPokemonDetails(pokemon)))
+      // dispatch(setPokemons(pokemonDetails))
       // console.log(pokemonsRes)
-      // dispatch(getPokemonsWithDetails(pokemonsRes))
+      dispatch(getPokemonsWithDetails(pokemonsRes))
     }   
     console.log('render')
     fetchPokemons()

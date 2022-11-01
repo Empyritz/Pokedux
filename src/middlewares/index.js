@@ -4,17 +4,32 @@ export const logger = (store) => (next) => (action) => {
   next(action)
 }
 
-export const featuring = (store) => (next) => (actionInfo) => {
-  const featured = [{ name: 'fab' }, ...actionInfo.action.payload]
-  const updatedActionInfo = { ...actionInfo, action: {...actionInfo.action, payload: featured }}
+export const featuring = (store) => (next) => (action) => {
+  const featured = [{ name: 'fab' }, ...action.payload]
+  const updatedActionInfo = { ...action, payload: featured}
   next(updatedActionInfo)
 }
 
-export const prefix = (store) => (next) => (actionInfo) => {
-  const prefixed = actionInfo.action.payload.map(pokemon => ({
+export const prefix = (store) => (next) => (action) => {
+  const prefixed = action.payload.map(pokemon => ({
     ...pokemon,
     name: 'Poke ' + pokemon.name
   }))
-  const updateAction = {...actionInfo, action: {...actionInfo.action, payload: prefixed }}
+  const updateAction = {...action, payload: prefixed}
   next(updateAction)
 }
+
+// export const featuring = (store) => (next) => (actionInfo) => {
+//   const featured = [{ name: 'fab' }, ...actionInfo.action.payload]
+//   const updatedActionInfo = { ...actionInfo, action: {...actionInfo.action, payload: featured }}
+//   next(updatedActionInfo)
+// }
+
+// export const prefix = (store) => (next) => (actionInfo) => {
+//   const prefixed = actionInfo.action.payload.map(pokemon => ({
+//     ...pokemon,
+//     name: 'Poke ' + pokemon.name
+//   }))
+//   const updateAction = {...actionInfo, action: {...actionInfo.action, payload: prefixed }}
+//   next(updateAction)
+// }

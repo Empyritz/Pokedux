@@ -6,7 +6,7 @@ export const setPokemons = (payload) => ({
   payload,
 })
 
-// export const getPokemonsWithDetails = (pokemons = []) => async (dispatch) => {
-//   const pokemonsDetails = await Promise.all(pokemons.map(pokemon => getPokemonDetails(pokemon) ))
-//   dispatch(setPokemons(pokemonsDetails))
-// }
+export const getPokemonsWithDetails = (pokemons = []) => async (dispatch) => {
+  const pokemonsDetails = await Promise.all(pokemons.map(pokemon => getPokemonDetails(pokemon) ))
+  dispatch(setPokemons(pokemonsDetails))
+}
