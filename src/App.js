@@ -7,11 +7,13 @@ import './App.css';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
 import logo from './statics/logo.svg'
+// import { toJS } from 'immutable'
 // import { setLoading } from './actions/index';
 
 function App() {
-  const pokemons = useSelector(state => state.pokemons)
-  const loading = useSelector(state => state.loading)
+  // const pokemons = useSelector(state => state.pokemons)
+  const pokemons = useSelector(state => state.get('pokemons')).toJS()
+  const loading = useSelector(state => state.get('loading'))
   const dispatch = useDispatch()
 
   useEffect(() => {
